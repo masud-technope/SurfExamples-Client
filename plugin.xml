@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="SurfExample"
+            id="ca.usask.cs.srlab.surfexample">
+      </category>
+      <view
+            name="SurfExample"
+            icon="icons/sclogo4.png"
+            category="ca.usask.cs.srlab.surfexample"
+            class="ca.usask.cs.srlab.surfexample.views.SurfExampleClientView"
+            id="ca.usask.cs.srlab.surfexample.views.SurfExampleClientView">
+      </view>
+   </extension>
+    <extension point="org.eclipse.ui.commands">
+         <category
+               id="ca.usask.cs.srlab.surfexample.category"
+               description="This is a category for command"
+               name="commandcategory">
+         </category>
+         <command
+               categoryId="ca.usask.cs.srlab.surfexample.category"
+               defaultHandler="ca.usask.cs.srlab.surfexample.handlers.SurfExampleHandler"
+               id="ca.usask.cs.srlab.surfexample.SurfExampleClient"
+               name="Search Examples">
+         </command>
+         <command
+         		categoryId="ca.usask.cs.srlab.surfexample.category"
+         		defaultHandler="ca.usask.cs.srlab.surfexample.handlers.ShowSurfExampleHandler"
+         		id="ca.usask.cs.srlab.surfexample.ShowSurfExample"
+         		name="Enable SurfExample">
+         </command>
+          
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+         <menuContribution   
+               allPopups="false"
+               locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+               <menu label="SurfExample" icon="icons/sclogo4.png" id="ca.usask.cs.srlab.surfexample.popupmenu">
+               <command commandId="ca.usask.cs.srlab.surfexample.ShowSurfExample"
+                     id="ca.usask.cs.srlab.surfexample.ShowSurfExampleMenu"
+                     label="Enable SurfExample"
+                     icon="icons/enablesc16.png"
+                     style="push">
+               </command>
+               <command
+                     commandId="ca.usask.cs.srlab.surfexample.SurfExampleClient"
+                     id="ca.usask.cs.srlab.surfexample.SurfClipseMenu"
+                     label="Search Examples"
+                     icon="icons/search16.png"
+                     style="push">
+               </command>
+            </menu>
+         </menuContribution>
+         <menuContribution 
+         locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+               <menu label="SurfExample" id="ca.usask.cs.srlab.surfexample.mainmenu">
+               <command commandId="ca.usask.cs.srlab.surfexample.ShowSurfExample"
+                     id="ca.usask.cs.srlab.surfexample.ShowSurfExampleMenu"
+                     label="Enable SurfExample"
+                     icon="icons/enablesc16.png"
+                     style="push">
+               </command>
+               </menu>
+         </menuContribution> 
+   </extension>
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+      commandId="ca.usask.cs.srlab.surfexample.SurfExampleClient">
+      </handler>
+      <handler 
+      commandId="ca.usask.cs.srlab.surfexample.ShowSurfExample">
+      </handler>
+     
+     </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="ca.usask.cs.srlab.surfexample.views.SurfExampleClientView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   
+   
+
+</plugin>
