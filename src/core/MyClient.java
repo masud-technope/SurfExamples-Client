@@ -18,8 +18,8 @@ public class MyClient {
 	 */
 
 	 //String web_service_url="http://wssurfclipse.appspot.com/surfclipse_app?";
-	//String web_service_url = "http://localhost:8080/wssurfexamples/SurfExamples_app?";
-	String web_service_url="http://srlabg53-2.usask.ca/wssurfexamples/SurfExamples_app?";
+	String web_service_url = "http://localhost:8080/wssurfexamples/SurfExamples_app?";
+	//String web_service_url="http://srlabg53-2.usask.ca/wssurfexamples/SurfExamples_app?";
 	String searchQuery;
 	String queryException;
 	String codecontext;
@@ -53,6 +53,7 @@ public class MyClient {
 		} catch (Exception exc) {
 			
 		}
+		
 		this.web_service_url += params;
 		System.out.println(this.web_service_url);
 		System.out.println( "Query exception:"+this.queryException+", Search query:" + this.searchQuery+", selected line:"+this.targetExceptionLine);
@@ -67,6 +68,7 @@ public class MyClient {
 		long endTime = System.currentTimeMillis();
 		long time_interval = (endTime - startTime) / 1000;
 		System.out.println("Time required for search:" + time_interval + " s");
+		System.out.println("Results returned:"+results.size());
 		// now showing the results to timer label
 		// show_time_interval(time_interval);
 		return results; // convert_json_to_results(jsonResponse);
