@@ -20,6 +20,7 @@ import ca.usask.cs.srlab.surfexample.views.SurfExampleClientView;
 
 
 import query.MyQueryMaker;
+import visitor.CustomMethodMiner;
 
 public class SearchEventManager {
 
@@ -127,6 +128,7 @@ public class SearchEventManager {
 			PlatformUI.getWorkbench()
 			.getActiveWorkbenchWindow()
 			.getActivePage().showView(viewID);
+			
 		} catch (Exception exc) {
 			// System.err.println(exc.getMessage());
 			// System.err.println("Failed to update Eclipse view"+exc.getMessage());
@@ -203,11 +205,18 @@ public class SearchEventManager {
 			
 			//extracting code fragment
 			this.contextCode = fileContent;
+			//normalizing the context code
+			CustomMethodMiner miner=new CustomMethodMiner(this.contextCode, this.selectedLine);
+			this.contextCode=miner.getContextCode(); //get reduced sized code
+			
 		} catch (Exception exc) {
 			System.err.println(exc.getMessage());
 		}
 		return this.contextCode;
 	}
+	
+	
+	
 	
 	
 	

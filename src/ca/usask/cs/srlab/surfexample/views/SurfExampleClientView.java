@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -327,6 +328,7 @@ public class SurfExampleClientView extends ViewPart {
 				IStructuredSelection selection = (IStructuredSelection) event
 						.getSelection();
 				if(selection==null)return;
+				viewer.refresh(false, true);
 				Result result = (Result) selection.toList().get(0);
 				codeViewer.setText(result.completeCode);
 				selectHighlightCodeViewer();
@@ -350,6 +352,7 @@ public class SurfExampleClientView extends ViewPart {
 		// adding the paint item
 		setItemHeight(table);
 		setPaintItem(table);
+		setKeyEventItems(table);
 	}
 
 	protected void selectHighlightCodeViewer() {
@@ -447,8 +450,37 @@ public class SurfExampleClientView extends ViewPart {
 				event.detail &= ~SWT.FOREGROUND;
 			}
 		});
+		/* table.addListener(SWT.EraseItem, new Listener() {
+		     public void handleEvent(Event event) {
+		        event.detail &= ~SWT.HOT;
+		        if ((event.detail & SWT.SELECTED) == 0) 
+		          return; 
+		        int clientWidth = ((Composite)event.widget).getClientArea().width;
+		        GC gc = event.gc;
+		       Color oldForeground = gc.getForeground();
+		        Color oldBackground = gc.getBackground();
+		        gc.setBackground(event.display.getSystemColor(SWT.COLOR_YELLOW));
+		        gc.setForeground(event.display.getSystemColor(SWT.COLOR_BLUE));
+		        gc.fillGradientRectangle(0, event.y, clientWidth, event.height, true);
+		        gc.setForeground(oldForeground);
+		        gc.setBackground(oldBackground);
+		        event.detail &= ~SWT.SELECTED;
+		     }
+		  });*/
 	}
 
+	protected void setKeyEventItems(Table table)
+	{
+		//adding key events with the table
+		table.addListener(SWT.KeyDown, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				// TODO Auto-generated method stub
+				System.out.println("Selected:"+ event.index+" "+event.item);
+			}
+		});
+	}
+	
 	protected void setPaintItem(Table table) {
 		// adding paint item
 		table.addListener(SWT.PaintItem, new Listener() {
